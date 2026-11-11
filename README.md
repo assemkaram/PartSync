@@ -120,6 +120,14 @@ The full requirements are in [docs/requirements.md](docs/requirements.md). In br
 - [ ] Add build saving, comparison, and export
 - [ ] Accessibility and responsive design review
 
+## Team
+
+1. Assem Karam Kamel
+2. Omar Mohamad Adly Mohamad
+3. Omar Mohamed Ahmed Ibrahim Omar
+4. Abdelmaged Ahmed Abdelmaged Hekal
+5. Ahmed Adel Fekry AbdelQader
+
 ## Contributing
 
 Contributions are welcome. Please open an issue to discuss significant changes before submitting a pull request.
