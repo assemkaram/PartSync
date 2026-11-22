@@ -88,11 +88,11 @@ cd partsync
 **US-15: Clear error messages.** As a user, I want clear messages when something is missing or wrong so that I know how to fix it.
 - An empty or invalid budget shows a specific message next to the field. A failed AI request shows a retry option without losing saved builds.
 
-The full set of requirements and scenarios is in [docs/requirements.md](docs/requirements.md).
+The full set of requirements and scenarios is in [docs/PartSync_Requirements.docx](docs/PartSync_Requirements.docx).
 
 ## Requirements Overview
 
-The full requirements are in [docs/requirements.md](docs/requirements.md). In brief:
+The full requirements are in [docs/PartSync_Requirements.docx](docs/PartSync_Requirements.docx). In brief:
 
 - Inputs: budget (currency) and primary use case; optional CPU brand preference (Intel or AMD).
 - Outputs: a complete build (CPU, GPU, motherboard, RAM, storage, PSU, case) within budget or with a clear note on the overage.
