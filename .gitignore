@@ -406,7 +406,7 @@ Desktop.ini
 # /server/scripts/check-rtl.mjs
 # /server/scripts/check-unused-exports.mjs
 
-/server/scripts/sigma_worker.py
+# /server/scripts/sigma_worker.py
 
 /server/scripts/verify-ai-error-and-gemini-quota.mjs
 /server/scripts/verify-ai-function.mjs
