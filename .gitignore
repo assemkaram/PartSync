@@ -420,9 +420,9 @@ Desktop.ini
 # /server/scripts/verify-catalogue-specs.mjs
 # /server/scripts/verify-catalogue.mjs
 
-/server/scripts/verify-listing-coverage.mjs
-/server/scripts/verify-module-recovery.mjs
-/server/scripts/verify-price-integrity.mjs
+# /server/scripts/verify-listing-coverage.mjs
+# /server/scripts/verify-module-recovery.mjs
+# /server/scripts/verify-price-integrity.mjs
 
 /server/scripts/verify-retailer-stock-freshness.mjs
 /server/scripts/verify-retailer-stock-parser.mjs
