@@ -1,0 +1,197 @@
+// TEAM P02 | STEP P02-028 | Review this file, then remove this marker only.
+/**
+ * src/ reachability audit.
+ *
+ *   node scripts/audit-unused.mjs
+ *
+ * Walks import/require/dynamic-import/vi.mock edges from the app entry points and
+ * reports any src file nothing reaches. Also flags console.* left in prod paths.
+ */
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { dirname, join, relative, resolve } from 'node:path';
+
+const ROOT = process.cwd();
+const SRC = join(ROOT, 'client/src');
+const ENTRIES = ['client/src/main.jsx', 'client/src/App.jsx', 'client/src/router.jsx'];
+const EXTS = ['.js', '.jsx', '.css', '.json'];
+
+function walk(dir, out = []) {
+  for (const entry of readdirSync(dir)) {
+    const full = join(dir, entry);
+    if (statSync(full).isDirectory()) walk(full, out);
+    else out.push(full);
+  }
+  return out;
+}
+
+const all = walk(SRC).map((p) => relative(ROOT, p).replace(/\\/g, '/'));
+const IMPORTS =
+  /(?:import|export)[^'"`]*?from\s*['"]([^'"]+)['"]|import\s*\(\s*['"]([^'"]+)['"]\s*\)|require\(\s*['"]([^'"]+)['"]\s*\)|vi\.mock\(\s*['"]([^'"]+)['"]|(?:import|export)\s*\*?\s*(?:\w+,?\s*)?from\s*['"]([^'"]+)['"]/g;
+
+function resolveSpec(spec, fromFile) {
+  let base;
+  if (spec.startsWith('@/')) base = join(SRC, spec.slice(2));
+  // Relative to the importing file's directory — `resolve()` did this for the
+  // app; the server walk must resolve the same way (`../../../client/src/…`).
+  else if (spec.startsWith('.')) base = resolve(dirname(fromFile), spec);
+  else return null;
+
+  const candidates = [base, ...EXTS.map((e) => base + e), ...EXTS.map((e) => join(base, `index${e}`))];
+  for (const c of candidates) {
+    try {
+      if (statSync(c).isFile()) return relative(ROOT, c).replace(/\\/g, '/');
+    } catch {
+      /* not this one */
+    }
+  }
+  return null;
+}
+
+const graph = new Map();
+for (const file of all) {
+  if (!/\.(js|jsx)$/.test(file)) continue;
+  const source = readFileSync(join(ROOT, file), 'utf8');
+  const deps = new Set();
+  for (const m of source.matchAll(IMPORTS)) {
+    const spec = m[1] ?? m[2] ?? m[3] ?? m[4];
+    if (!spec) continue;
+    const resolved = resolveSpec(spec, join(ROOT, file));
+    if (resolved) deps.add(resolved);
+  }
+  graph.set(file, deps);
+}
+
+const seen = new Set();
+const queue = [...ENTRIES];
+while (queue.length) {
+  const file = queue.pop();
+  if (!file || seen.has(file)) continue;
+  seen.add(file);
+  for (const dep of graph.get(file) ?? []) queue.push(dep);
+}
+
+/**
+ * Server-side entry points.
+ *
+ * `server/api/` is loaded by the standalone Node backend, not by the client bundle, and `vite.config.js` is loaded by
+ * the dev server — so the reachability walk must start there as well, otherwise
+ * the shared Gemini proxy looks unreachable while it is in fact the production
+ * path for the AI feature.
+ */
+const SERVER_ENTRIES = [];
+const collectServer = (dir, out = []) => {
+  for (const entry of readdirSync(dir)) {
+    const full = join(dir, entry);
+    if (statSync(full).isDirectory()) collectServer(full, out);
+    else if (/\.(js|jsx)$/.test(entry)) out.push(relative(ROOT, full).replace(/\\/g, '/'));
+  }
+  return out;
+};
+for (const dir of ['server/api']) {
+  try {
+    SERVER_ENTRIES.push(...collectServer(join(ROOT, dir)));
+  } catch {
+    /* no server directory */
+  }
+}
+SERVER_ENTRIES.push('client/vite.config.js', 'server/index.js');
+// JavaScript projects have no ambient declaration files to include.
+// The shared server code is reached FROM those two entries; seeding the folder
+// too keeps the walk correct even when an entry is renamed.
+SERVER_ENTRIES.push(...[]);
+
+for (const file of all) {
+  if (!/\.(js|jsx)$/.test(file)) continue;
+  const source = readFileSync(join(ROOT, file), 'utf8');
+  const deps = new Set();
+  for (const m of source.matchAll(IMPORTS)) {
+    const spec = m[1] ?? m[2] ?? m[3] ?? m[4];
+    if (!spec) continue;
+    const resolved = resolveSpec(spec, join(ROOT, file));
+    if (resolved) deps.add(resolved);
+  }
+  /**
+   * Recover what a regex stage can miss (multi-line `import { … } from` blocks):
+   * if the source names another module in a trailing static import, treat it as
+   * imported. This is a reachability audit, not a bundler — a false "reachable"
+   * is harmless, a false "orphan" deletes working code.
+   */
+  const named = [...source.matchAll(/from\s+['"]([^'"]+)['"]/g)].map((m) => m[1]);
+  for (const spec of named) {
+    const resolved = resolveSpec(spec, join(ROOT, file));
+    if (resolved) deps.add(resolved);
+  }
+
+  graph.set(file, deps);
+}
+
+const serverSeen = new Set();
+const serverQueue = [...SERVER_ENTRIES];
+while (serverQueue.length) {
+  const file = serverQueue.pop();
+  if (!file || serverSeen.has(file)) continue;
+  serverSeen.add(file);
+  for (const dep of graph.get(file) ?? []) serverQueue.push(dep);
+}
+for (const file of serverSeen) seen.add(file);
+
+// Test files are entry points for themselves.
+const tests = all.filter((f) => f.includes('__tests__') || f.endsWith('.test.js') || f.endsWith('.test.jsx'));
+for (const t of tests) {
+  const queue2 = [t];
+  while (queue2.length) {
+    const file = queue2.pop();
+    if (!file || seen.has(file)) continue;
+    seen.add(file);
+    for (const dep of graph.get(file) ?? []) queue2.push(dep);
+  }
+}
+
+const orphans = all.filter((f) => /\.(js|jsx)$/.test(f) && !seen.has(f));
+
+console.log(`\n=== UNREACHABLE FILES (${orphans.length}) ===`);
+for (const f of orphans) console.log('  ' + f);
+
+console.log('\n=== console.* IN src/ (excluding tests) ===');
+for (const file of all) {
+  if (!/\.(js|jsx)$/.test(file) || file.includes('__tests__')) continue;
+  const lines = readFileSync(join(ROOT, file), 'utf8').split(/\r?\n/);
+  lines.forEach((line, i) => {
+    if (/\bconsole\.(log|debug|info|warn|error)\b/.test(line) && !line.trim().startsWith('*')) {
+      console.log(`  ${file}:${i + 1}  ${line.trim().slice(0, 110)}`);
+    }
+  });
+}
+
+console.log('\n=== COMMENTED-OUT CODE BLOCKS ===');
+for (const file of all) {
+  if (!/\.(js|jsx)$/.test(file)) continue;
+  const lines = readFileSync(join(ROOT, file), 'utf8').split(/\r?\n/);
+  let run = [];
+  const flush = () => {
+    const code = run.filter((l) => /[;{=()]/.test(l) && !/^\s*\*/.test(l));
+    if (code.length >= 2) {
+      console.log(`  ${file}:${run[0].line}  (${code.length} lines)`);
+      code.slice(0, 3).forEach((l) => console.log('      ' + l.text.trim().slice(0, 100)));
+    }
+    run = [];
+  };
+  lines.forEach((text, i) => {
+    const isComment = /^\s*\/\//.test(text);
+    if (isComment) run.push({ line: i + 1, text });
+    else flush();
+  });
+  flush();
+}
+
+console.log(
+  `\nTotal src files: ${all.length} · reachable: ${all.length - orphans.length} · orphans: ${orphans.length}`,
+);
+
+// Every remaining source file should be reachable from an app, server or test entry.
+const realOrphans = orphans;
+
+if (realOrphans.length > 0) {
+  console.error(`\n✖ ${realOrphans.length} unreachable file(s) that are not ambient types.`);
+  process.exit(1);
+}
