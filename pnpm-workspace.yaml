@@ -1,0 +1,7 @@
+# TEAM P02 | STEP P02-023 | Review this file, then remove this marker only.
+packages:
+  - 'client'
+  - 'server'
+
+allowBuilds:
+  esbuild: true
