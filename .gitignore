@@ -412,9 +412,9 @@ Desktop.ini
 # /server/scripts/verify-ai-function.mjs
 # /server/scripts/verify-ai-performance.mjs
 
-/server/scripts/verify-budget-shortlist.mjs
-/server/scripts/verify-build-agent-regressions.mjs
-/server/scripts/verify-builder-ui.mjs
+# /server/scripts/verify-budget-shortlist.mjs
+# /server/scripts/verify-build-agent-regressions.mjs
+# /server/scripts/verify-builder-ui.mjs
 
 /server/scripts/verify-catalogue-categories.mjs
 /server/scripts/verify-catalogue-specs.mjs
