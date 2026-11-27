@@ -408,20 +408,23 @@ Desktop.ini
 
 # /server/scripts/sigma_worker.py
 
-/server/scripts/verify-ai-error-and-gemini-quota.mjs
-/server/scripts/verify-ai-function.mjs
-/server/scripts/verify-ai-performance.mjs
+# /server/scripts/verify-ai-error-and-gemini-quota.mjs
+# /server/scripts/verify-ai-function.mjs
+# /server/scripts/verify-ai-performance.mjs
+
 /server/scripts/verify-budget-shortlist.mjs
 /server/scripts/verify-build-agent-regressions.mjs
 /server/scripts/verify-builder-ui.mjs
+
 /server/scripts/verify-catalogue-categories.mjs
 /server/scripts/verify-catalogue-specs.mjs
 /server/scripts/verify-catalogue.mjs
+
 /server/scripts/verify-listing-coverage.mjs
 /server/scripts/verify-module-recovery.mjs
 /server/scripts/verify-price-integrity.mjs
-/server/scripts/verify-retailer-stock-freshness.mjs
 
+/server/scripts/verify-retailer-stock-freshness.mjs
 /server/scripts/verify-retailer-stock-parser.mjs
 /server/scripts/verify-rigpilot-runtime.mjs
 /server/scripts/verify-search-grouping.mjs
