@@ -1,13 +1,38 @@
 <!doctype html>
-<html lang="en">
+<!-- TEAM P03 | STEP P03-004 | Review this file, then remove this marker only. -->
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>partsync</title>
+    <meta name="theme-color" content="#0A0F1E" />
+    <meta
+      name="description"
+      content="RIGPILOT — Build with confidence. An expert AI PC builder for component selection, compatibility, power balance and value."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>RIGPILOT — Build with confidence</title>
+    <script>
+      // Resolve the theme BEFORE first paint so there is never a flash of the
+      // wrong palette (the stylesheet ships dark values, so a light-theme user
+      // would otherwise see a dark frame for one paint).
+      (function () {
+        var root = document.documentElement;
+        var theme = 'dark';
+        try {
+          var raw = localStorage.getItem('nexus-ui');
+          theme = (raw ? (JSON.parse(raw).state || {}).theme : null) || 'dark';
+        } catch (e) {
+          /* first visit, or storage disabled — dark is the default */
+        }
+        root.classList.toggle('dark', theme === 'dark');
+        root.classList.toggle('light', theme === 'light');
+        root.style.colorScheme = theme;
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
