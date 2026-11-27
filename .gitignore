@@ -1,1 +1,454 @@
-node_modules/ 
+
+
+# ===== COMMON: DEPENDENCIES AND PACKAGE MANAGER =====
+**/node_modules/
+.pnpm-store/
+.pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm/
+
+# ===== COMMON: REAL ENVIRONMENT FILES (KEEP .env.example) =====
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+
+# ===== COMMON: BUILD OUTPUTS AND CACHES =====
+client/dist/
+server/dist/
+coverage/
+**/coverage/
+.vite/
+**/.vite/
+.vercel/
+.netlify/
+.turbo/
+.cache/
+.parcel-cache/
+playwright-report/
+test-results/
+
+# ===== COMMON: LOCAL DATABASE, EDITOR AND OS =====
+server/supabase/.temp/
+server/supabase/.branches/
+.vscode/
+.idea/
+.DS_Store
+**/.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*.tmp
+*.log
+
+/team/
+
+# ======================================================================
+# GROUP G01 — PERSON 2 — باك إند 2 — Supabase / Data / Platform
+# These are files owned by another teammate; do not edit them in this worktree.
+# ======================================================================
+
+# --- 01 ROOT FILES AND GITHUB WORKFLOWS ---
+/.github/workflows/sigma-feed.yml
+/dev.js
+/package.json
+/pnpm-lock.yaml
+/pnpm-workspace.yaml
+/README.md
+
+# --- 02 DOCUMENTATION AND TEAM PLAN ---
+/docs/AI_ARCHITECTURE.md
+/docs/ARCHITECTURE.md
+/docs/DATABASE.md
+/docs/ENV_SETUP_AR.md
+/docs/PROJECT_STRUCTURE_AR.md
+/docs/README.md
+/docs/RELEASE_NOTES_AR.md
+/docs/RETAILER_STRATEGY.md
+/docs/SCRIPTS_AR.md
+/team/FILE_OWNERSHIP.csv
+/team/TEAM_SPLIT_AR.md
+/team/USING_PERSON_PROFILES_AR.md
+/team/WORK_ORDER_AR.md
+
+# --- 09 SERVER AUDIT AND MAINTENANCE SCRIPTS ---
+/server/scripts/audit-all.mjs
+/server/scripts/audit-env.mjs
+/server/scripts/audit-i18n-strings.mjs
+/server/scripts/audit-unused.mjs
+/server/scripts/check-bundle-secrets.mjs
+/server/scripts/check-deps.mjs
+/server/scripts/check-design-system.mjs
+/server/scripts/check-i18n.mjs
+/server/scripts/check-orphans.mjs
+/server/scripts/check-rtl.mjs
+/server/scripts/check-unused-exports.mjs
+/server/scripts/sigma_worker.py
+/server/scripts/verify-ai-error-and-gemini-quota.mjs
+/server/scripts/verify-ai-function.mjs
+/server/scripts/verify-ai-performance.mjs
+/server/scripts/verify-budget-shortlist.mjs
+/server/scripts/verify-build-agent-regressions.mjs
+/server/scripts/verify-builder-ui.mjs
+/server/scripts/verify-catalogue-categories.mjs
+/server/scripts/verify-catalogue-specs.mjs
+/server/scripts/verify-catalogue.mjs
+/server/scripts/verify-listing-coverage.mjs
+/server/scripts/verify-module-recovery.mjs
+/server/scripts/verify-price-integrity.mjs
+/server/scripts/verify-retailer-stock-freshness.mjs
+/server/scripts/verify-retailer-stock-parser.mjs
+/server/scripts/verify-rigpilot-runtime.mjs
+/server/scripts/verify-search-grouping.mjs
+/server/scripts/verify-signup-resilience.mjs
+/server/scripts/verify-spa-routing.mjs
+
+# --- 10 SUPABASE FUNCTIONS AND MIGRATIONS ---
+/server/supabase/config.toml
+/server/supabase/functions/retailer-sync/deno.json
+/server/supabase/functions/retailer-sync/index.js
+/server/supabase/functions/retailer-sync/parsers.js
+/server/supabase/migrations/001_initial_schema.sql
+/server/supabase/migrations/002_catalogue_rls.sql
+/server/supabase/migrations/003_1_performance_data.sql
+/server/supabase/migrations/003_2_fps_benchmarks_seed.sql
+/server/supabase/migrations/004_chat.sql
+/server/supabase/migrations/005_ratings.sql
+/server/supabase/migrations/006_fix_storage_rule.sql
+/server/supabase/migrations/007_i18n_content.sql
+/server/supabase/migrations/008_retailer_products.sql
+/server/supabase/migrations/009_retailer_cron.sql
+/server/supabase/migrations/010_price_units.sql
+/server/supabase/migrations/011_atomic_ai_usage_quota.sql
+/server/supabase/migrations/012_legacy_build_prices_egp.sql
+/server/supabase/migrations/013_authenticated_ai_quota.sql
+/server/supabase/migrations/014_guest_ai_quota.sql
+/server/supabase/migrations/015_username_signup_rate_limit.sql
+/server/supabase/migrations/016_retailer_build_item_snapshots.sql
+/server/supabase/migrations/017_retailer_cron_secret_key.sql
+/server/supabase/seed.sql
+
+# --- 11 OTHER PROJECT FILES ---
+/.gitignore.person-02
+/.sparse-checkout.person-02
+
+# ======================================================================
+# GROUP G02 — PERSON 1 — باك إند 1 — API / Auth / AI Gateway
+# These are files owned by another teammate; do not edit them in this worktree.
+# ======================================================================
+
+# --- 07 SERVER API AND SHARED BACKEND LIBRARIES ---
+/server/api/ai/\[...path\].js
+/server/api/auth/health.js
+/server/api/auth/login.js
+/server/api/auth/signup.js
+/server/index.js
+/server/lib/geminiProxy.js
+/server/lib/supabaseEnv.js
+/server/lib/supabaseKeyAuth.js
+/server/package.json
+/server/README.md
+
+# --- 07 SERVER CONFIGURATION AND BACKEND ---
+/server/.env.example
+
+# --- 08 SERVER AUTOMATED TESTS ---
+/server/test/api.test.js
+/server/test/supabase-key-auth.test.js
+
+# --- 11 OTHER PROJECT FILES ---
+/.gitignore.person-01
+/.sparse-checkout.person-01
+
+# ======================================================================
+# GROUP G04 — PERSON 4 — فرونت إند 2 — Builder / Catalogue / Pricing
+# These are files owned by another teammate; do not edit them in this worktree.
+# ======================================================================
+
+# --- 02 DOCUMENTATION AND TEAM PLAN ---
+/docs/COMPATIBILITY_RULES.md
+
+# --- 03 CLIENT STATIC ASSETS ---
+/client/public/data/retailer_snapshot.json
+/client/public/data/retailer_snapshot_by_category/case.json
+/client/public/data/retailer_snapshot_by_category/cooling.json
+/client/public/data/retailer_snapshot_by_category/cpu.json
+/client/public/data/retailer_snapshot_by_category/gpu.json
+/client/public/data/retailer_snapshot_by_category/motherboard.json
+/client/public/data/retailer_snapshot_by_category/psu.json
+/client/public/data/retailer_snapshot_by_category/ram.json
+/client/public/data/retailer_snapshot_by_category/storage.json
+/client/public/data/sigma_products.json
+
+# --- 04 CLIENT COMPONENTS AND UI ---
+/client/src/components/domain/BudgetMeter.jsx
+/client/src/components/domain/BuildCard.jsx
+/client/src/components/domain/BuildScoreRing.jsx
+/client/src/components/domain/BuildSummaryPanel.jsx
+/client/src/components/domain/CategoryIcon.jsx
+/client/src/components/domain/CompatibilityBadge.jsx
+/client/src/components/domain/CompatibilityBanner.jsx
+/client/src/components/domain/ComponentCard.jsx
+/client/src/components/retail/__tests__/imageReferrer.test.js
+/client/src/components/retail/CategoryPlaceholder.jsx
+/client/src/components/retail/ComparePricesModal.jsx
+/client/src/components/retail/CompareTable.jsx
+/client/src/components/retail/FilterPanel.jsx
+/client/src/components/retail/MobileFilterSheet.jsx
+/client/src/components/retail/Pagination.jsx
+/client/src/components/retail/RetailerLogo.jsx
+/client/src/components/retail/SearchBar.jsx
+/client/src/components/retail/SearchResultCard.jsx
+
+# --- 05 CLIENT PAGES, HOOKS, SERVICES AND STATE ---
+/client/src/hooks/useCatalogue.js
+/client/src/hooks/useComponents.js
+/client/src/hooks/useRetailers.js
+/client/src/hooks/useSearch.js
+/client/src/lib/__tests__/buildTotals.test.js
+/client/src/lib/__tests__/cpuPower.test.js
+/client/src/lib/__tests__/offerRanking.test.js
+/client/src/lib/__tests__/prebuiltFromCatalogue.test.js
+/client/src/lib/__tests__/retailerCatalogue.test.js
+/client/src/lib/__tests__/retailerImage.test.js
+/client/src/lib/__tests__/specInference.test.js
+/client/src/lib/buildTotals.js
+/client/src/lib/categoryRules.js
+/client/src/lib/compatibility/__tests__/engine.test.js
+/client/src/lib/compatibility/__tests__/filter.test.js
+/client/src/lib/compatibility/__tests__/fixtures.js
+/client/src/lib/compatibility/__tests__/shippedData.test.js
+/client/src/lib/compatibility/categories.js
+/client/src/lib/compatibility/defaultRules.js
+/client/src/lib/compatibility/engine.js
+/client/src/lib/compatibility/filter.js
+/client/src/lib/compatibility/handlers.js
+/client/src/lib/offerRanking.js
+/client/src/lib/prebuiltFromCatalogue.js
+/client/src/lib/retailerCatalogue.js
+/client/src/lib/retailerImage.js
+/client/src/lib/searchDefaults.js
+/client/src/lib/skuGrouping.js
+/client/src/lib/specInference.js
+/client/src/lib/stockFreshness.js
+/client/src/lib/utils.js
+/client/src/pages/BuildDetail.jsx
+/client/src/pages/Builder.jsx
+/client/src/pages/Compare.jsx
+/client/src/pages/PrebuiltConfigs.jsx
+/client/src/pages/Search.jsx
+/client/src/services/__tests__/searchService.test.js
+/client/src/services/componentsService.js
+/client/src/services/retailers/__tests__/categoryFromUrl.test.js
+/client/src/services/retailers/__tests__/categoryPrecedence.test.js
+/client/src/services/retailers/__tests__/grouping.test.js
+/client/src/services/retailers/__tests__/parsers.test.js
+/client/src/services/retailers/__tests__/placeholderPrice.test.js
+/client/src/services/retailers/__tests__/scraperCategory.test.js
+/client/src/services/retailers/__tests__/skuGrouping.test.js
+/client/src/services/retailers/aggregator.js
+/client/src/services/retailers/bootstrap.json
+/client/src/services/retailers/registry.js
+/client/src/services/retailers/sigmaFeed.js
+/client/src/services/retailers/sigmaSnapshot.js
+/client/src/services/searchService.js
+/client/src/store/useBuildStore.js
+
+# --- 11 OTHER PROJECT FILES ---
+/.gitignore.person-04
+/.sparse-checkout.person-04
+
+# ======================================================================
+# GROUP G05 — PERSON 5 — فرونت إند 3 — AI / Accounts / Community
+# These are files owned by another teammate; do not edit them in this worktree.
+# ======================================================================
+
+# --- 04 CLIENT COMPONENTS AND UI ---
+/client/src/components/domain/AIStatusPanel.jsx
+/client/src/components/domain/SmartBuildWizard.jsx
+
+# --- 05 CLIENT PAGES, HOOKS, SERVICES AND STATE ---
+/client/src/hooks/useAuth.js
+/client/src/lib/aiError.js
+/client/src/lib/performance/__tests__/estimator.test.js
+/client/src/lib/performance/constants.js
+/client/src/lib/performance/estimator.js
+/client/src/lib/performanceTier.js
+/client/src/lib/scoring/__tests__/buildScore.test.js
+/client/src/lib/scoring/__tests__/candidateShortlist.test.js
+/client/src/lib/scoring/__tests__/fallbackBuild.test.js
+/client/src/lib/scoring/buildScore.js
+/client/src/lib/scoring/candidateShortlist.js
+/client/src/lib/scoring/fallbackBuild.js
+/client/src/lib/scoring/reference.js
+/client/src/pages/AIAdvisor.jsx
+/client/src/pages/Auth.jsx
+/client/src/pages/BuildDoctor.jsx
+/client/src/pages/Community.jsx
+/client/src/pages/Dashboard.jsx
+/client/src/pages/SmartBuilder.jsx
+/client/src/services/__tests__/buildDoctor.test.js
+/client/src/services/advisorAgent.js
+/client/src/services/ai/__tests__/models.test.js
+/client/src/services/ai/__tests__/thoughtSignature.test.js
+/client/src/services/ai/client.js
+/client/src/services/ai/config.js
+/client/src/services/ai/grounding.js
+/client/src/services/ai/groundingBudget.js
+/client/src/services/ai/models.js
+/client/src/services/ai/providers/__tests__/googleError.test.js
+/client/src/services/ai/providers/errors.js
+/client/src/services/ai/providers/geminiProvider.js
+/client/src/services/ai/providers/googleError.js
+/client/src/services/ai/translate.js
+/client/src/services/aiTools.js
+/client/src/services/buildAgent.js
+/client/src/services/buildDoctor.js
+/client/src/services/buildsService.js
+/client/src/services/geminiService.js
+/client/src/services/performanceAi.js
+/client/src/services/prompts/advisor.js
+/client/src/services/prompts/buildDoctor.js
+/client/src/services/prompts/buildGenerator.js
+/client/src/services/prompts/perfEstimator.js
+/client/src/services/supabaseClient.js
+
+# --- 11 OTHER PROJECT FILES ---
+/.gitignore.person-05
+/.sparse-checkout.person-05
+
+# ======================================================================
+# SHARED FILES — remain visible to all five teammates
+# ======================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# /README.md
+# /dev.js
+# /package.json
+# /pnpm-lock.yaml
+# /pnpm-workspace.yaml
+# /team/FILE_OWNERSHIP.csv
+# /team/TEAM_SPLIT_AR.md
+# /team/WORK_ORDER_AR.md
+# /team/USING_PERSON_PROFILES_AR.md
+# /docs/ENV_SETUP_AR.md
+# /docs/SCRIPTS_AR.md
+# /docs/ARCHITECTURE.md
+# /docs/PROJECT_STRUCTURE_AR.md
+# /client/.env.example
+# /server/.env.example
+# /client/package.json
+# /server/package.json
+# /.gitignore.person-03
+# /.sparse-checkout.person-03
+# /client/.eslintrc.cjs
+# /client/index.html
+# /client/postcss.config.js
+# /client/public/404.html
+/client/src/App.jsx
+/client/src/components/layout/AppShell.jsx
+/client/src/components/layout/BottomNav.jsx
+/client/src/components/layout/LanguageSwitcher.jsx
+/client/src/components/layout/Logo.jsx
+/client/src/components/layout/PageHeader.jsx
+/client/src/components/layout/Sidebar.jsx
+/client/src/components/layout/Topbar.jsx
+/client/src/components/scene/Hero3DScene.jsx
+/client/src/components/scene/HeroSceneStatic.jsx
+/client/src/components/scene/SceneErrorBoundary.jsx
+/client/src/components/shared/AIThinkingPanel.jsx
+/client/src/components/shared/AnimatedNumber.jsx
+/client/src/components/shared/ComponentName.jsx
+/client/src/components/shared/EmptyState.jsx
+/client/src/components/shared/ErrorBoundary.jsx
+/client/src/components/shared/GradientMesh.jsx
+/client/src/components/shared/LoadingSkeleton.jsx
+/client/src/components/shared/Magnetic.jsx
+/client/src/components/shared/PageTransition.jsx
+/client/src/components/shared/PriceTag.jsx
+/client/src/components/shared/StreamingMessage.jsx
+/client/src/components/ui/badge.jsx
+/client/src/components/ui/button.jsx
+/client/src/components/ui/card.jsx
+/client/src/components/ui/dropdown-menu.jsx
+/client/src/components/ui/input.jsx
+/client/src/components/ui/label.jsx
+/client/src/components/ui/select.jsx
+/client/src/components/ui/skeleton.jsx
+/client/src/components/ui/tooltip.jsx
+/client/src/hooks/useCardTilt.js
+/client/src/hooks/useSceneCapability.js
+/client/src/i18n/fonts.js
+/client/src/i18n/index.js
+/client/src/lib/__tests__/appUrl.test.js
+/client/src/lib/__tests__/displayText.test.js
+/client/src/lib/__tests__/i18nCompatibility.test.js
+/client/src/lib/apiBase.js
+/client/src/lib/appUrl.js
+/client/src/lib/assets.js
+/client/src/lib/brand.js
+/client/src/lib/constants.js
+/client/src/lib/displayText.js
+/client/src/lib/i18nCompatibility.js
+/client/src/lib/i18nContent.js
+/client/src/lib/lazyWithRetry.js
+/client/src/lib/moduleRecovery.js
+/client/src/lib/motion.js
+/client/src/lib/navigation.js
+/client/src/lib/share.js
+/client/src/main.jsx
+/client/src/pages/Landing.jsx
+/client/src/pages/NotFound.jsx
+/client/src/router.jsx
+/client/src/store/useUIStore.js
+/client/src/styles/arabicFontBundle.js
+/client/src/styles/globals.css
+/client/tailwind.config.js
+/client/vite.config.js
+/client/vitest.config.js
+/docs/JAVASCRIPT_GUIDE_AR.md
+/client/README.md
+/client/.prettierrc.json
+/client/public/.htaccess
+/client/public/_headers
+/client/public/_redirects
+/client/public/_routes.json
+/client/public/favicon.svg
+/client/public/media/hero-scene.png
+/client/public/media/hero-scene.webp
+/client/src/i18n/locales/ar/ai.json
+/client/src/i18n/locales/ar/builder.json
+/client/src/i18n/locales/ar/common.json
+/client/src/i18n/locales/ar/pages.json
+/client/src/i18n/locales/en/ai.json
+/client/src/i18n/locales/en/builder.json
+/client/src/i18n/locales/en/common.json
+/client/src/i18n/locales/en/pages.json
+/client/vercel.json
