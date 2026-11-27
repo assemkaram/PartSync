@@ -1,0 +1,84 @@
+#!/usr/bin/env node
+// TEAM P02 | STEP P02-024 | Review this file, then remove this marker only.
+/**
+ * `pnpm audit:all` — the Phase 6 release gate.
+ *
+ * Runs every static check in order and fails fast, so a green run means:
+ *   · JavaScript lint and production build are clean
+ *   · every UI string exists in both languages
+ *   · the RTL rules hold
+ *   · no secret leaked into the bundle
+ *   · no unreachable source file was left behind
+ *   · the test suite passes
+ *
+ * The live Gemini probes (server/scripts/verify-*.mjs) are intentionally NOT part of
+ * this gate: they need a key and the network, and a flaky 503 must not block a
+ * build. Run them by hand when touching the AI layer.
+ */
+import { spawnSync } from 'node:child_process';
+
+const steps = [
+  ['lint', 'pnpm', ['lint']],
+  ['i18n', 'node', ['server/scripts/check-i18n.mjs']],
+  ['i18n strings', 'node', ['server/scripts/audit-i18n-strings.mjs']],
+  ['rtl', 'node', ['server/scripts/check-rtl.mjs']],
+  ['design system', 'node', ['server/scripts/check-design-system.mjs']],
+  ['dependencies', 'node', ['server/scripts/check-deps.mjs'], { allowFindings: true }],
+  ['build', 'pnpm', ['build']],
+  ['bundle secrets', 'node', ['server/scripts/check-bundle-secrets.mjs']],
+  ['environment boundaries', 'node', ['server/scripts/audit-env.mjs']],
+  ['spa routing', 'node', ['server/scripts/verify-spa-routing.mjs']],
+  // The AI route is the one thing that only exists in production, so it is
+  // checked without a deploy: the same Web handler used by the standalone backend is imported and
+  // called. Live calls are skipped when GEMINI_API_KEY is absent.
+  ['auth route configuration', 'node', ['server/scripts/verify-signup-resilience.mjs']],
+  ['module-load recovery', 'node', ['server/scripts/verify-module-recovery.mjs']],
+  ['price integrity', 'node', ['server/scripts/verify-price-integrity.mjs']],
+  ['search grouping and placeholder exclusion', 'node', ['server/scripts/verify-search-grouping.mjs']],
+  ['ai route', 'node', ['server/scripts/verify-ai-function.mjs']],
+  ['backend API tests', 'pnpm', ['test:server']],
+  ['retailer coverage', 'node', ['server/scripts/verify-listing-coverage.mjs']],
+  // Phase 15: the two data defects users reported — "CPU filter shows fans" and
+  // "the builder uses parts nobody sells". Both are checks over the shipped
+  // snapshot, so they fail a release instead of a screenshot.
+  ['catalogue categories', 'node', ['server/scripts/verify-catalogue-categories.mjs']],
+  ['catalogue specs', 'node', ['server/scripts/verify-catalogue-specs.mjs']],
+  ['unused files', 'node', ['server/scripts/audit-unused.mjs']],
+  // Phase 11: both FAIL the build (unlike audit-unused, which only reports).
+  ['orphans', 'node', ['server/scripts/check-orphans.mjs']],
+  ['unused exports', 'node', ['server/scripts/check-unused-exports.mjs']],
+  ['tests', 'pnpm', ['test']],
+];
+
+let failed = 0;
+
+// `check-deps` is advisory because peer/type packages can be present without a direct runtime import.
+const ADVISORY = new Set(['dependencies']);
+
+for (const [name, cmd, args] of steps) {
+  process.stdout.write(`\n──────── ${name} ────────\n`);
+
+  // `shell: true` is required on Windows: pnpm is a .cmd shim and spawning it
+  // directly yields a null status. Args here are constants, so no injection risk.
+  const result = spawnSync(cmd, args, {
+    stdio: 'inherit',
+    shell: true,
+    env: process.env,
+  });
+
+  if (result.status !== 0 && !ADVISORY.has(name)) {
+    console.error(`\n✖ ${name} failed (exit ${result.status})`);
+    failed += 1;
+    break;
+  }
+  if (result.status !== 0 && ADVISORY.has(name)) {
+    console.log(`\n~ ${name}: reported above (advisory, not a failure)`);
+  }
+}
+
+if (failed) {
+  console.error('\n✖ audit:all FAILED');
+  process.exit(1);
+}
+
+console.log('\n✔ audit:all passed — client/server checks, prices, API tests, i18n, RTL, build, secrets and dead code');

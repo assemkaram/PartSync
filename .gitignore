@@ -387,14 +387,17 @@ Desktop.ini
 
 /docs/ENV_SETUP_AR.md
 /docs/SCRIPTS_AR.md
+
 /client/.env.example
 /server/.env.example
 /client/package.json
 /server/package.json
-/server/scripts/audit-all.mjs
-/server/scripts/audit-env.mjs
-/server/scripts/audit-i18n-strings.mjs
-/server/scripts/audit-unused.mjs
+
+# /server/scripts/audit-all.mjs
+# /server/scripts/audit-env.mjs
+# /server/scripts/audit-i18n-strings.mjs
+# /server/scripts/audit-unused.mjs
+
 /server/scripts/check-bundle-secrets.mjs
 /server/scripts/check-deps.mjs
 /server/scripts/check-design-system.mjs
@@ -402,7 +405,9 @@ Desktop.ini
 /server/scripts/check-orphans.mjs
 /server/scripts/check-rtl.mjs
 /server/scripts/check-unused-exports.mjs
+
 /server/scripts/sigma_worker.py
+
 /server/scripts/verify-ai-error-and-gemini-quota.mjs
 /server/scripts/verify-ai-function.mjs
 /server/scripts/verify-ai-performance.mjs
@@ -416,6 +421,7 @@ Desktop.ini
 /server/scripts/verify-module-recovery.mjs
 /server/scripts/verify-price-integrity.mjs
 /server/scripts/verify-retailer-stock-freshness.mjs
+
 /server/scripts/verify-retailer-stock-parser.mjs
 /server/scripts/verify-rigpilot-runtime.mjs
 /server/scripts/verify-search-grouping.mjs
