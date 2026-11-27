@@ -416,9 +416,9 @@ Desktop.ini
 # /server/scripts/verify-build-agent-regressions.mjs
 # /server/scripts/verify-builder-ui.mjs
 
-/server/scripts/verify-catalogue-categories.mjs
-/server/scripts/verify-catalogue-specs.mjs
-/server/scripts/verify-catalogue.mjs
+# /server/scripts/verify-catalogue-categories.mjs
+# /server/scripts/verify-catalogue-specs.mjs
+# /server/scripts/verify-catalogue.mjs
 
 /server/scripts/verify-listing-coverage.mjs
 /server/scripts/verify-module-recovery.mjs
