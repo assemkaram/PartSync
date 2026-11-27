@@ -349,29 +349,29 @@ Desktop.ini
 
 
 
-/README.md
-/dev.js
-/package.json
-/pnpm-lock.yaml
-/pnpm-workspace.yaml
-/team/FILE_OWNERSHIP.csv
-/team/TEAM_SPLIT_AR.md
-/team/WORK_ORDER_AR.md
-/team/USING_PERSON_PROFILES_AR.md
-/docs/ENV_SETUP_AR.md
-/docs/SCRIPTS_AR.md
-/docs/ARCHITECTURE.md
-/docs/PROJECT_STRUCTURE_AR.md
-/client/.env.example
-/server/.env.example
-/client/package.json
-/server/package.json
-/.gitignore.person-03
-/.sparse-checkout.person-03
-/client/.eslintrc.cjs
-/client/index.html
-/client/postcss.config.js
-/client/public/404.html
+# /README.md
+# /dev.js
+# /package.json
+# /pnpm-lock.yaml
+# /pnpm-workspace.yaml
+# /team/FILE_OWNERSHIP.csv
+# /team/TEAM_SPLIT_AR.md
+# /team/WORK_ORDER_AR.md
+# /team/USING_PERSON_PROFILES_AR.md
+# /docs/ENV_SETUP_AR.md
+# /docs/SCRIPTS_AR.md
+# /docs/ARCHITECTURE.md
+# /docs/PROJECT_STRUCTURE_AR.md
+# /client/.env.example
+# /server/.env.example
+# /client/package.json
+# /server/package.json
+# /.gitignore.person-03
+# /.sparse-checkout.person-03
+# /client/.eslintrc.cjs
+# /client/index.html
+# /client/postcss.config.js
+# /client/public/404.html
 /client/src/App.jsx
 /client/src/components/layout/AppShell.jsx
 /client/src/components/layout/BottomNav.jsx
