@@ -431,9 +431,10 @@ Desktop.ini
 # /server/scripts/verify-signup-resilience.mjs
 # /server/scripts/verify-spa-routing.mjs
 
-/server/supabase/config.toml
-/server/supabase/functions/retailer-sync/index.js
-/server/supabase/functions/retailer-sync/parsers.js
+# /server/supabase/config.toml
+# /server/supabase/functions/retailer-sync/index.js
+# /server/supabase/functions/retailer-sync/parsers.js
+
 /server/supabase/migrations/001_initial_schema.sql
 /server/supabase/migrations/002_catalogue_rls.sql
 /server/supabase/migrations/003_1_performance_data.sql
