@@ -435,23 +435,23 @@ Desktop.ini
 # /server/supabase/functions/retailer-sync/index.js
 # /server/supabase/functions/retailer-sync/parsers.js
 
-/server/supabase/migrations/001_initial_schema.sql
-/server/supabase/migrations/002_catalogue_rls.sql
-/server/supabase/migrations/003_1_performance_data.sql
-/server/supabase/migrations/003_2_fps_benchmarks_seed.sql
-/server/supabase/migrations/004_chat.sql
-/server/supabase/migrations/005_ratings.sql
-/server/supabase/migrations/006_fix_storage_rule.sql
-/server/supabase/migrations/007_i18n_content.sql
-/server/supabase/migrations/008_retailer_products.sql
-/server/supabase/migrations/009_retailer_cron.sql
-/server/supabase/migrations/010_price_units.sql
-/server/supabase/migrations/011_atomic_ai_usage_quota.sql
-/server/supabase/migrations/012_legacy_build_prices_egp.sql
-/server/supabase/migrations/013_authenticated_ai_quota.sql
-/server/supabase/migrations/014_guest_ai_quota.sql
-/server/supabase/migrations/015_username_signup_rate_limit.sql
-/server/supabase/migrations/016_retailer_build_item_snapshots.sql
-/server/supabase/seed.sql
-/server/supabase/migrations/017_retailer_cron_secret_key.sql
-/server/supabase/functions/retailer-sync/deno.json
+# /server/supabase/migrations/001_initial_schema.sql
+# /server/supabase/migrations/002_catalogue_rls.sql
+# /server/supabase/migrations/003_1_performance_data.sql
+# /server/supabase/migrations/003_2_fps_benchmarks_seed.sql
+# /server/supabase/migrations/004_chat.sql
+# /server/supabase/migrations/005_ratings.sql
+# /server/supabase/migrations/006_fix_storage_rule.sql
+# /server/supabase/migrations/007_i18n_content.sql
+# /server/supabase/migrations/008_retailer_products.sql
+# /server/supabase/migrations/009_retailer_cron.sql
+# /server/supabase/migrations/010_price_units.sql
+# /server/supabase/migrations/011_atomic_ai_usage_quota.sql
+# /server/supabase/migrations/012_legacy_build_prices_egp.sql
+# /server/supabase/migrations/013_authenticated_ai_quota.sql
+# /server/supabase/migrations/014_guest_ai_quota.sql
+# /server/supabase/migrations/015_username_signup_rate_limit.sql
+# /server/supabase/migrations/016_retailer_build_item_snapshots.sql
+# /server/supabase/seed.sql
+# /server/supabase/migrations/017_retailer_cron_secret_key.sql
+# /server/supabase/functions/retailer-sync/deno.json
